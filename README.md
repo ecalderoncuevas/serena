@@ -1,21 +1,88 @@
-# Next.js template
+# Serena
 
-This is a Next.js template with shadcn/ui.
+Web app con un mapa interactivo de las zonas de montaña donde, **dentro de la ley**, se puede hacer vivac, pernoctar o acampar. Empieza por el Pirineo catalán.
 
-## Adding components
+Proyecto final de DAW 2 · Edu Calderón · 2026–2027
 
-To add components to your app, run the following command:
+- **Qué hay que hacer:** [`docs/ROADMAP.md`](docs/ROADMAP.md)
+- **Qué se ha hecho y estado actual:** [`docs/HISTORY.md`](docs/HISTORY.md)
+- **Reglas para Claude Code:** [`CLAUDE.md`](CLAUDE.md)
+
+## Stack
+
+Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui (Base UI) · Vercel
+
+## Requisitos
+
+- **Node 24** (no la 26: Vercel todavía no la admite en las builds) y **npm 11**, que viene con Node 24.
+- **Git**, y **GitHub CLI** para iniciar sesión.
+- **VS Code** con la extensión *GitHub Pull Requests*.
+
+## Empezar en un ordenador nuevo
+
+Solo la primera vez en cada ordenador.
+
+**1. Instalar Node 24**
+
+- **Mac:**
+  ```bash
+  brew install node@24
+  brew link --overwrite --force node@24
+  ```
+- **Windows:** descarga el instalador de la **versión 24** desde [nodejs.org](https://nodejs.org) (en la lista de versiones, la v24.x). No elijas la LTS a ciegas: desde octubre de 2026 la LTS es la 26.
+
+**2. Iniciar sesión en GitHub** con la cuenta `ecalderoncuevas`:
 
 ```bash
-npx shadcn@latest add button
+gh auth login
+gh auth setup-git
 ```
 
-This will place the ui components in the `components` directory.
+**3. Clonar el proyecto fuera de iCloud y OneDrive**
 
-## Using components
+- **Mac:**
+  ```bash
+  mkdir -p ~/Developer && cd ~/Developer
+  ```
+- **Windows (PowerShell):**
+  ```powershell
+  mkdir $HOME\Developer; cd $HOME\Developer
+  ```
 
-To use the components in your app, import them as follows:
+Después, en los dos:
 
-```tsx
-import { Button } from "@/components/ui/button";
+```bash
+git clone https://github.com/ecalderoncuevas/serena.git
+cd serena
+git switch testing
+npm install
+npm run dev
+```
+
+Abre <http://localhost:3000>.
+
+**4. Variables de entorno:** cuando el proyecto las tenga, copia `.env.example` a `.env.local` y rellena las claves. **Nunca subas `.env.local` a GitHub.**
+
+## Cada vez que te sientas a trabajar
+
+1. En VS Code: cámbiate a `testing` y haz **Sync**.
+2. Si ha cambiado `package-lock.json`, ejecuta `npm install`.
+3. Lee **Estado actual** en [`docs/HISTORY.md`](docs/HISTORY.md).
+4. Crea la rama de la tarea **desde `testing`**: `feature/…`, `fix/…` o `chore/…`.
+5. Al terminar, añade tu entrada en `HISTORY.md`, haz commit y abre el PR hacia `testing`.
+
+## Flujo Git
+
+- `main` es producción y está protegida: **solo se entra por pull request desde `testing`**.
+- `testing` es la preview y no está protegida. El código nuevo va en ramas de tarea; los cambios pequeños (docs) pueden ir directos.
+- Rama de tarea → PR a `testing` → **Squash and merge** → borrar la rama.
+- Al final de cada sprint: PR de `testing` a `main` → **Create a merge commit**.
+- Commits en catalán: `feat(header): afegeix menú responsive`.
+
+## Comandos
+
+```bash
+npm run dev      # desarrollo
+npm run build    # build de producción
+npm run lint     # ESLint
 ```
