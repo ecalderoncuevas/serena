@@ -14,7 +14,7 @@ Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui (Base UI) �
 
 ## Requisitos
 
-- **Node 24** (no la 26: Vercel todavía no la admite en las builds) y **npm 11**, que viene con Node 24.
+- **Node 24 o superior** (`"engines": { "node": ">=24" }` en `package.json`). Vercel compila con la 24.x; en local también sirve la 26. **npm 11**, que viene con Node.
 - **Git**, y **GitHub CLI** para iniciar sesión.
 - **VS Code** con la extensión *GitHub Pull Requests*.
 
@@ -22,14 +22,16 @@ Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui (Base UI) �
 
 Solo la primera vez en cada ordenador.
 
-**1. Instalar Node 24**
+**1. Instalar Node (24 o superior)**
+
+Si el ordenador ya tiene Node 24 o 26 (`node -v`), salta este paso.
 
 - **Mac:**
   ```bash
   brew install node@24
   brew link --overwrite --force node@24
   ```
-- **Windows:** descarga el instalador de la **versión 24** desde [nodejs.org](https://nodejs.org) (en la lista de versiones, la v24.x). No elijas la LTS a ciegas: desde octubre de 2026 la LTS es la 26.
+- **Windows:** descarga el instalador **LTS** desde [nodejs.org](https://nodejs.org). La 24 y la 26 sirven.
 
 **2. Iniciar sesión en GitHub** con la cuenta `ecalderoncuevas`:
 
@@ -82,7 +84,9 @@ Abre <http://localhost:3000>.
 ## Comandos
 
 ```bash
-npm run dev      # desarrollo
-npm run build    # build de producción
-npm run lint     # ESLint
+npm run dev           # desarrollo
+npm run build         # build de producción
+npm run lint          # ESLint (no funciona por ahora: ver HISTORY.md)
+npm run typecheck     # errores de TypeScript
+npm run format        # formatea el código con Prettier
 ```
