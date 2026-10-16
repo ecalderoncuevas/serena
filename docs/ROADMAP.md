@@ -266,9 +266,9 @@ feature/header · feature/mapa-base · fix/menu-mobil · chore/actualitza-deps
 
 **Ajuste 2: hazlo todo desde VS Code con la extensión oficial "GitHub Pull Requests".** El merge normal de VS Code no permite squash, pero esa extensión sí: creas el PR, eliges *Squash and merge* y marcas "borrar rama", sin salir del editor.
 
-**Protección (hecho el 16/10/2026):** `main` está protegida con un *ruleset*: PR obligatorio, sin borrado ni force push. `testing` no está protegida (decisión consultada con el profesor). Squash hacia `testing` y merge commit hacia `main`. Añade una GitHub Action que haga `lint + typecheck + build` en cada PR. Vercel, además, crea una preview por cada PR.
+**Protección (hecho el 16/10/2026):** `main` está protegida con un *ruleset*: PR obligatorio, sin borrado ni force push. `testing` no está protegida (decisión consultada con el profesor). Squash hacia `testing` y merge commit hacia `main`. Añade una GitHub Action que haga `typecheck + build` en cada PR (y `lint` cuando vuelva a funcionar con ESLint 10). Vercel, además, crea una preview por cada PR.
 
-**Definición de "terminado"** para cada tarea: funciona en escritorio y móvil · sin errores de TypeScript ni de lint · la build de la preview pasa · revisado en `testing` · tarea actualizada en Notion.
+**Definición de "terminado"** para cada tarea: funciona en escritorio y móvil · sin errores de TypeScript · la build de la preview pasa · revisado en `testing` · tarea actualizada en Notion.
 
 ---
 
@@ -276,7 +276,7 @@ feature/header · feature/mapa-base · fix/menu-mobil · chore/actualitza-deps
 
 Las instrucciones para preparar un ordenador (Mac, PC de casa o instituto) están en el [`README.md`](../README.md). Resumen de lo decidido:
 
-- **Node 24** y **npm 11** (siempre npm). Sin fnm. No actualizar npm a la 12.
+- **Node 24 o superior** (`engines: ">=24"`; Vercel compila con 24.x) y **npm 11** (siempre npm). Sin fnm. No actualizar npm a la 12. Pasar a Node 26 en Vercel cuando lo admita (rama `chore/node-26`).
 - Carpeta del proyecto **fuera de iCloud / OneDrive**: `~/Developer/serena` (Mac) o `C:\Users\<usuario>\Developer\serena` (Windows).
 - Proyecto creado con `npx shadcn@latest init --preset b0 --template next --name serena` (Next.js 16 + TypeScript + Tailwind v4 + shadcn/ui sobre Base UI).
 - Las dependencias (GSAP, Lenis, MapLibre…) se instalan **cuando la fase las necesita**, cada una en su rama.
@@ -430,14 +430,15 @@ Crea dentro de la página del proyecto:
 
 La lista viva está en Notion (Tareas → vista *Sprint 1*). Pendiente para cerrar la F0:
 
-- [ ] Rama `chore/docs-projecte`: CLAUDE.md, README.md, docs/ROADMAP.md y docs/HISTORY.md
-- [ ] Pedir la clave de la API de Meteocat
+- [x] Documentación: CLAUDE.md, README.md, docs/ROADMAP.md y docs/HISTORY.md
+- [ ] Pedir la clave de la API de Meteocat (antes, hablar con el profe)
 - [ ] Análisis de la competencia (Notion › Investigación › Competencia)
 - [ ] Entrevistas: amigos, conocidos y, si responden, influencers (guion en Notion › Investigación)
 - [ ] Normativa de 10–15 zonas del Pirineo con fuentes oficiales
 - [ ] Cerrar el MVP con MoSCoW (Notion › Funcionalidades (MoSCoW)) y registrarlo en Decisiones
-- [ ] Rama `chore/setup-projecte`: `engines`, Prettier y estructura de carpetas
-- [ ] Rama `chore/ci-github-actions`: lint + typecheck + build en cada PR (y exigirlo en los rulesets)
+- [x] Rama `chore/setup-projecte`: `engines` con Node `>=24`
+- [ ] Actualizar Next a 16.4.2 (vulnerabilidad crítica en 16.3.4)
+- [ ] Rama `chore/ci-github-actions`: typecheck + build en cada PR y exigirlo en el ruleset de `main` (lint, cuando vuelva a funcionar con ESLint 10)
 
 ---
 

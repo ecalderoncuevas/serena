@@ -32,7 +32,7 @@ Propón a Edu la entrada para `docs/HISTORY.md`: actualizar *Estado actual* y a�
 
 ## Stack y entorno
 
-- **Node 24** y **npm 11**. Usa siempre **npm**, nunca pnpm, yarn ni bun.
+- **Node 24 o superior** (`engines: ">=24"`; Vercel compila con 24.x) y **npm 11**. Usa siempre **npm**, nunca pnpm, yarn ni bun.
 - **Next.js 16** (App Router, Turbopack, `proxy.ts` en lugar de `middleware.ts`, `params` y `cookies()` asíncronos) + **React 19** + **TypeScript**.
 - **Tailwind CSS v4** (tokens con `@theme`, colores en OKLCH).
 - **shadcn/ui con Base UI** (preset `b0`). Añade componentes con `npx shadcn@latest add <componente>` y sigue la variante de **Base UI**, no la de Radix.
@@ -59,9 +59,10 @@ Propón a Edu la entrada para `docs/HISTORY.md`: actualizar *Estado actual* y a�
 
 ```bash
 npm run dev      # http://localhost:3000
-npm run build    # tiene que pasar antes de cada PR
-npm run lint
-npx tsc --noEmit
+npm run build         # tiene que pasar antes de cada PR
+npm run lint          # falla con ESLint 10 por ahora; no lo arregles sin preguntar
+npm run typecheck     # tsc --noEmit
+npm run format        # Prettier (con orden de clases de Tailwind)
 ```
 
 ## Definición de terminado
@@ -69,7 +70,7 @@ npx tsc --noEmit
 La tarea está terminada cuando se cumple todo esto:
 
 - Funciona en escritorio y en móvil.
-- No hay errores de TypeScript ni de lint.
+- No hay errores de TypeScript (`npm run typecheck`).
 - `npm run build` pasa.
 - Está revisada en la preview de `testing`.
 - `docs/HISTORY.md` está actualizado.

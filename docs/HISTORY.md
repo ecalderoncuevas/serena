@@ -15,9 +15,9 @@ Qué se ha hecho, qué se ha decidido y dónde estamos. Lo que queda por hacer e
 
 - **Fase:** F0 · Descubrimiento y setup. Prevista hasta el 11/10, se está alargando para cerrar la investigación.
 - **Sprint:** S1 · Setup e investigación.
-- **Hecho recientemente:** `main` protegida con un ruleset; documentación del proyecto en el repo.
+- **Hecho recientemente:** `main` protegida con un ruleset; documentación del proyecto en el repo; setup del proyecto (`chore/setup-projecte`).
 - **En curso:** entrevistas a usuarios y MoSCoW del MVP.
-- **Siguiente paso:** pedir la clave de Meteocat y análisis de la competencia.
+- **Siguiente paso:** actualizar Next a 16.4.2 (vulnerabilidad), análisis de la competencia, normativa de zonas y CI con GitHub Actions. La clave de Meteocat, después de hablar con el profe.
 - **Bloqueos:** esperando respuesta para las entrevistas.
 
 ---
@@ -31,15 +31,21 @@ Qué se ha hecho, qué se ha decidido y dónde estamos. Lo que queda por hacer e
 - **Hecho:**
   - Rama `main` protegida con un ruleset en GitHub (PR obligatorio, sin borrado ni force push).
   - `CLAUDE.md`, `README.md`, `docs/ROADMAP.md` y `docs/HISTORY.md` añadidos al repo.
+  - Setup del proyecto (`chore/setup-projecte`): `engines` con Node `>=24` en `package.json`. Se empezó con más cambios (ESLint, Next, Prettier), pero se descartó la rama y se rehízo solo con esto.
   - Base de datos *Funcionalidades (MoSCoW)* en Notion con 32 funcionalidades y una propuesta de prioridad.
   - Guion de entrevistas separado para influencers y para amigos y conocidos (Notion › Investigación).
 - **Decisiones:**
   - `testing` sin proteger, consultado con el profesor. Solo `main` exige PR.
   - Squash hacia `testing` y merge commit hacia `main`.
   - Sin carpeta `src/`: rutas en `app/` en la raíz, como dejó la plantilla.
+  - Node `>=24` en lugar de fijar la 24: en local vale la 26 (PC de casa, instituto, profes) y Vercel sigue con la 24.x hasta que admita la 26.
+  - La clave de Meteocat se pide después de hablar con el profe, que conoce una.
   - Documentación del repo dividida en `CLAUDE.md`, `README.md`, `docs/ROADMAP.md` (qué hacer) y `docs/HISTORY.md` (qué se ha hecho).
   - En el MoSCoW, *cuentas de usuario* baja a Should, la ruta offline se divide en GPX (Must) y PWA (Should) y *qué llevar* entra como Should. Pendiente de validar con las entrevistas.
-- **Siguiente paso:** clave de Meteocat, competencia.
+- **Problemas:**
+  - `npm run lint` falla con ESLint 10 (*contextOrFilename.getFilename is not a function*): `eslint-plugin-react` aún no es compatible. Se deja como está por ahora.
+  - `npm audit` marca una vulnerabilidad crítica en Next 16.3.4 (corregida en 16.4.2). Pendiente de una tarea aparte. **No usar `npm audit fix --force`**.
+- **Siguiente paso:** competencia, normativa y CI.
 
 ### 05/10/2026 · Mac
 
