@@ -1,0 +1,41 @@
+# CI de Serena: comprueba que el proyecto compila antes de fusionar un PR.
+# Se ejecuta en cada PR hacia main o testing y en cada push a testing.
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main, testing]
+  push:
+    branches: [testing]
+
+# Si subes otro commit mientras el anterior aún se está comprobando,
+# cancela la comprobación vieja y solo hace la nueva.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Typecheck y build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v7
+
+      - name: Instalar Node 24
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Comprobar tipos (TypeScript)
+        run: npm run typecheck
+
+      - name: Build de producción
+        run: npm run build
